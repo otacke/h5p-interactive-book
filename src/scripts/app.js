@@ -21,7 +21,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     this.previousState = contentData.previousState;
 
     // Apply custom base color
-    if (!Colors.isBaseColor(config.behaviour.baseColor)) {
+    if (config.behaviour.baseColor && !Colors.isBaseColor(config.behaviour.baseColor)) {
       Colors.setBase(config.behaviour.baseColor);
 
       const style = document.createElement('style');
