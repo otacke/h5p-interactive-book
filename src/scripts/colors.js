@@ -11,7 +11,11 @@ export default class Colors {
    * @param {string} color RGB color code in hex: #rrggbb.
    */
   static setBase(color) {
-    Colors.colorBase = Color(color || Colors.DEFAULT_COLOR_BASE);
+    if (!color) {
+      return;
+    }
+
+    Colors.colorBase = Color(color);
 
     // Get contrast color with highest contrast
     Colors.colorBg = [
