@@ -1,5 +1,5 @@
 {
-  "title": "Interactive Book",
+  "title": "Interactive Book (note.no)",
   "description": "An interactive book which displays content in pages and sections",
   "majorVersion": 1,
   "minorVersion": 7,
@@ -8,7 +8,7 @@
   "fullscreen": 1,
   "author": "Joubel",
   "license": "MIT",
-  "machineName": "H5P.InteractiveBook",
+  "machineName": "H5P.InteractiveBookNOTENO",
   "embedTypes": [
     "iframe"
   ],
@@ -29,7 +29,7 @@
       "minorVersion": 5
     },
     {
-      "machineName": "H5P.Column",
+      "machineName": "H5P.ColumnNOTENO",
       "majorVersion": 1,
       "minorVersion": 16
     },
