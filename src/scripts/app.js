@@ -861,7 +861,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       }
 
       this.setWrapperClassFromRatio(this.mainWrapper);
-      if (this.cover) {
+
+      if (this.cover && this.shouldShowCover) {
         this.displayCover($wrapper);
       }
 
@@ -933,11 +934,13 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       this.validateFragments, this.hashWindow
       );
 
-    const shouldShowCover = this.params.showCoverPage &&
-      !(urlFragments.chapter || contentData.previousState?.urlFragments?.chapter);
+    this.shouldShowCover = this.params.showCoverPage &&
+      !(
+        urlFragments.chapter || contentData.previousState?.urlFragments?.chapter
+      );
 
     // Initialize the support components
-    if (shouldShowCover) {
+    if (this.params.showCoverPage) {
       this.cover = new Cover(this.params.bookCover, contentData.metadata.title, this.l10n.read, contentId, this);
     }
 
