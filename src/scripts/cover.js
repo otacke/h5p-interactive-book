@@ -79,7 +79,6 @@ class Cover extends H5P.EventDispatcher {
     // Preparation
     if ((coverMedium.library || '').split(' ')[0] === 'H5P.Video') {
       coverMedium.params.visuals.fit = false;
-      coverMedium.params.visuals.controls = false;
     }
 
     const instance = H5P.newRunnable(coverMedium, this.contentId, H5P.jQuery(this.visuals), false, { metadata: coverMedium.medatata } );
