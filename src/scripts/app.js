@@ -3,7 +3,6 @@ import SideBar from './sidebar';
 import StatusBar from './statusbar';
 import Cover from './cover';
 import PageContent from './pagecontent';
-import 'element-scroll-polyfill';
 import Colors from './colors';
 
 export default class InteractiveBook extends H5P.EventDispatcher {
