@@ -484,7 +484,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
         container.scrollBy(0, -container.scrollHeight);
       }
       else {
-        console.log('should i scroll or nah?', event)
         if (event.data !== false) { // Note: undefined is treated as true here
           this.statusBarHeader.wrapper.scrollIntoView(true);
         }
