@@ -213,6 +213,10 @@
         {
           "label": "Label voor uitvouwen/invouwen navigatiemenu",
           "default": "Uit-/invouwen navigatiemenu"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

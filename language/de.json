@@ -213,6 +213,10 @@
         {
           "label": "Beschriftung des Buttons, um das Inhaltsverzeichnis ein- und auszublenden",
           "default": "Inhaltsverzeichnis ein- bzw. ausschalten"
+        },
+        {
+          "label": "\"Ein neues Kapitel wurde freigeschaltet\"",
+          "default": "Ein neues Kapitel wurde freigeschaltet."
         }
       ]
     }

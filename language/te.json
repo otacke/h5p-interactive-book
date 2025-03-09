@@ -213,6 +213,10 @@
         {
           "label": "నావిగేషన్ మెను విస్తరణ/కనుమరగవడం కోసం లేబుల్",
           "default": "నావిగేషన్ మెనుని టాగుల్ చేయండి"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

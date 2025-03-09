@@ -213,6 +213,10 @@
         {
           "label": "Етикет за разпъване/свиване на навигационното меню",
           "default": "Превключване на менюто за навигация"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

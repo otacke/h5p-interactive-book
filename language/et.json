@@ -213,6 +213,10 @@
         {
           "label": "Silt navigeerimismenüü avamiseks ja sulgemiseks",
           "default": "Ava või sulge navigeerimismenüü"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

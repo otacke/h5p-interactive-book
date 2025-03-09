@@ -213,6 +213,10 @@
         {
           "label": "Etichetta per espandere/ridurre il menu di navigazione",
           "default": "Mostra/Nascondi il menu di navigazione"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

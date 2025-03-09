@@ -213,6 +213,10 @@
         {
           "label": "展开/折叠导航菜单的标签",
           "default": "切换导航菜单"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

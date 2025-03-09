@@ -213,6 +213,10 @@
         {
           "label": "Etikett för att expandera/komprimera navigeringsmenyn",
           "default": "Växla läge på navigationsmeny"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

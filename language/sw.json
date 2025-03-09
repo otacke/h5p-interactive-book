@@ -213,6 +213,10 @@
         {
           "label": "Lebo ya kupanua/kukunja menyu ya urambazaji",
           "default": "Geuza menyu ya urambazaji"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

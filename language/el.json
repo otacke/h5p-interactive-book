@@ -213,6 +213,10 @@
         {
           "label": "Ετικέτα για την επέκταση / σύμπτυξη του μενού πλοήγησης",
           "default": "Εναλλαγή μενού πλοήγησης"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

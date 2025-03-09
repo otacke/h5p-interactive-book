@@ -213,6 +213,10 @@
         {
           "label": "Навигацийн менюг дэлгэх/хураах-ийн нэр",
           "default": "Навигацийн менюг шилжүүлэх"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

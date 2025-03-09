@@ -213,6 +213,10 @@
         {
           "label": "Label for expanding/collapsing navigation menu",
           "default": "Slå på navigasjonsmeny"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

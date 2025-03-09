@@ -213,6 +213,10 @@
         {
           "label": "Etiķete navigācijas izvēlnes izvēršanai/sakļaušanai",
           "default": "Pārslēgt navigācijas izvēlni"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

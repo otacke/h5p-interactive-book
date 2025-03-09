@@ -212,6 +212,10 @@
         {
           "default": "הצגת/הסתרת תפריט הניווט",
           "label": "תווית להרחבה/צמצום של תפריט הניווט"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ],
       "label": "הנחיות נגישות"

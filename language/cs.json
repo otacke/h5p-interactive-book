@@ -213,6 +213,10 @@
         {
           "label": "Popisek pro rozbalení/sbalení navigační nabídky",
           "default": "Přepnutí navigační nabídky"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

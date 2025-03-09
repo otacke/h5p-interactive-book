@@ -213,6 +213,10 @@
         {
           "label": "Nabigazio-menua zabaldu edo tolesteko etiketa",
           "default": "Zabaldu/Tolestu nabigazio-menua"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

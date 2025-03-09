@@ -213,6 +213,10 @@
         {
           "label": "네비게이션 메뉴 확장/축소 레이블",
           "default": "네비게이션 메뉴 온 오프"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

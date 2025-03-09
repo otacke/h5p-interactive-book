@@ -213,6 +213,10 @@
         {
           "label": "Etiqueta para expandir/contraer el menú de navegación",
           "default": "Alternar menú de navegación"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

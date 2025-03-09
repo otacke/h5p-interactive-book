@@ -213,6 +213,10 @@
         {
           "label": "Genişleyen/daraltan gezinme menüsü için etiket",
           "default": "Gezinme menüsünü aç/kapat"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

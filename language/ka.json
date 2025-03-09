@@ -213,6 +213,10 @@
         {
           "label": "ნავიგაციის მენიუს გაფართოების/ჩაკეცვის ეტიკეტი",
           "default": "ნავიგაციის მენიუს გადართვა"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

@@ -213,6 +213,10 @@
         {
           "label": "Позначка для розгортання/згортання навігаційного меню",
           "default": "Перемикання навігаційного меню"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

@@ -213,6 +213,10 @@
         {
           "label": "برچسب بازکردن/بستن منوی راهبری",
           "default": "بازکردن/بستن منوی راهبری"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

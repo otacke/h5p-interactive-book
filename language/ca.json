@@ -213,6 +213,10 @@
         {
           "label": "Etiqueta per ampliar el menú de navegació o reduir-lo",
           "default": "Activa o desactiva el menú de navegació"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

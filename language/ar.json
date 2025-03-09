@@ -213,6 +213,10 @@
         {
           "label": "وضع علامة لتوسيع / طي قائمة التنقل",
           "default": "تبديل قائمة التنقل"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

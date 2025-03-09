@@ -213,6 +213,10 @@
         {
           "label": "Näytä/piilota navigaatiovalikko -painikkeen teksti",
           "default": "Näytä/piilota navigaatiovalikko"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

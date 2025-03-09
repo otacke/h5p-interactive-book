@@ -213,6 +213,10 @@
         {
           "label": "Intitulé pour étendre/réduire le menu de navigation",
           "default": "Étendre/Réduire le menu"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }

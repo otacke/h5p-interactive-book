@@ -213,6 +213,10 @@
         {
           "label": "Besedilo za kazalo vsebine",
           "default": "Kazalo vsebine za navigacijo"
+        },
+        {
+          "label": "\"A new chapter can be accessed\"",
+          "default": "A new chapter can be accessed."
         }
       ]
     }
