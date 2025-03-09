@@ -4,6 +4,7 @@ import StatusBar from './statusbar';
 import Cover from './cover';
 import PageContent from './pagecontent';
 import Colors from './colors';
+import Screenreader from './screenreader.js';
 
 export default class InteractiveBook extends H5P.EventDispatcher {
   /**
@@ -35,6 +36,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       }
       document.head.appendChild(style);
     }
+
+    document.body.append(Screenreader.getDOM());
 
     this.activeChapter = 0;
     this.newHandler = {};
@@ -188,6 +191,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
         this.setActivityStarted(true);
         this.pageContent.resetChapters();
         this.sideBar.resetIndicators();
+
+        this.instantiateNavigationRestrictions();
       }
     };
 
@@ -767,6 +772,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
         }
 
         self.setSectionStatusByID(sectionUUID, self.activeChapter);
+        self.updateNavigationRestrictions(self.activeChapter);
       }
     });
 
@@ -824,6 +830,104 @@ export default class InteractiveBook extends H5P.EventDispatcher {
           this.updateChapterProgress(chapterId);
         }
       });
+    };
+
+    /**
+     * Update navigation restrictions.
+     * @param {number} targetChapterIndex Index of chapter to update restrictions for.
+     */
+    this.updateNavigationRestrictions = (targetChapterIndex) => {
+      if (this.params.behaviour.navigationRestrictionMode === 'none') {
+        return;
+      }
+
+      if (this.areNavigationRestrictionsMet(targetChapterIndex)) {
+        this.cascadeNavigationRestrictions(targetChapterIndex + 1, true);
+        this.statusBarHeader.updateStatusBar();
+        this.statusBarFooter.updateStatusBar();
+      }
+    }
+
+    /**
+     * Check if navigation restrictions are met for a chapter.
+     * @param {number} chapterIndex Index of chapter to check.
+     * @return {boolean} True if navigation restrictions are met and chapter can be accessed.
+     */
+    this.areNavigationRestrictionsMet = (chapterIndex) => {
+      const chapter = this.chapters[chapterIndex];
+      if (!chapter) {
+        return false;
+      }
+
+      if (chapter.isSummary) {
+        return false;
+      }
+
+      let mayProgressToNextChapter = false;
+      if (chapter.tasksLeft === 0) {
+        mayProgressToNextChapter = true;
+      }
+      else if (this.params.behaviour.navigationRestrictionMode === 'finished') {
+        mayProgressToNextChapter = chapter.completed;
+      }
+      else if (this.params.behaviour.navigationRestrictionMode === 'success') {
+        mayProgressToNextChapter =
+          chapter.completed && chapter.instance.getScore() === chapter.instance.getMaxScore();
+      }
+
+      return mayProgressToNextChapter;
+    };
+
+    /**
+     * Toggle chapter navigation.
+     * @param {number} chapterIndex Index of chapter to toggle navigation for.
+     * @param {boolean} enable True to enable navigation, false to disable.
+     */
+    this.toggleChapterNavigation = (chapterIndex, enable) => {
+      this.chapters[chapterIndex].isAccessRestricted = !enable;
+      this.sideBar.toggleChapterEnabled(chapterIndex, enable);
+    };
+
+    /**
+     * Instantiate navigation restrictions.
+     */
+    this.instantiateNavigationRestrictions = () => {
+      if (this.params.behaviour.navigationRestrictionMode === 'none') {
+        return;
+      }
+
+      this.cascadeNavigationRestrictions(0, true);
+      this.statusBarHeader.updateStatusBar();
+      this.statusBarFooter.updateStatusBar();
+    };
+
+    /**
+     * Cascade navigation restrictions.
+     * @param {number} index Index of chapter to start cascading from.
+     * @param {boolean} enable True to enable navigation, false to disable.
+     */
+    this.cascadeNavigationRestrictions = (index, enable) => {
+      if (index < 0 || index >= this.chapters.length) {
+        return;
+      }
+
+      this.toggleChapterNavigation(index, enable);
+
+      const nextEnableState = enable ? this.areNavigationRestrictionsMet(index) : false;
+      this.cascadeNavigationRestrictions(index + 1, nextEnableState);
+    }
+
+    /**
+     * Read text using screen reader.
+     * @param {string} a11yId Id of a11y item.
+     */
+    this.read = (a11yId) => {
+      const text = this.params.a11y[a11yId];
+      if (!text) {
+        return;
+      }
+
+      Screenreader.read(text);
     };
 
     /**
@@ -1028,6 +1132,17 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       // Kickstart the statusbar
       this.statusBarHeader.updateStatusBar();
       this.statusBarFooter.updateStatusBar();
+      this.instantiateNavigationRestrictions();
+
+      // Go back to first chapter if trying to access restricted chapter via URL
+      if (!this.areNavigationRestrictionsMet(this.activeChapter - 1)) {
+        const newChapter = {
+          h5pbookid: this.contentId,
+          chapter: `h5p-interactive-book-chapter-${this.chapters[0].instance.subContentId}`
+        };
+
+        this.trigger('newChapter', newChapter);
+      }
     }
   }
 
@@ -1080,6 +1195,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       .filter(chapter => chapter.params.content && chapter.params.content.length > 0);
 
     config.behaviour.displaySummary = config.behaviour.displaySummary === undefined || config.behaviour.displaySummary;
+    config.behaviour.navigationRestrictionMode = config.behaviour.navigationRestrictionMode || 'none';
 
     config.l10n = {
       read,
@@ -1113,6 +1229,10 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       interactionsProgress,
       totalScoreLabel,
     };
+
+    config.a11y.progress = config.a11y.progress ?? 'Page @page of @total.';
+    config.a11y.menu = config.a11y.menu ?? 'Toggle navigation menu';
+    config.a11y.newChapterCanBeAccessed = config.a11y.newChapterCanBeAccessed ?? 'A new chapter can be accessed.';
 
     return config;
   }

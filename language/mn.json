@@ -54,6 +54,21 @@
           "description": "Хэрэв идэвхжүүлсэн бол дасгал ажилгүй хуудсыг үзэхэд дууссан гэж тооцно. Дасгал даалгавартай хуудсын хувьд дасгалыг гүйцэтгэж байж дууссан гэж тооцно. Энэхүү тохиргоог идэвхжүүлээгүй тохиолдолд хуудас бүрийн доор хэрэглэгч дуусан гэж өөрөө тэмдэглэнэ."
         },
         {
+          "label": "Navigation restriction mode",
+          "description": "Set what restrictions you want to impose on the user to be able to progress through the book.",
+          "options": [
+            {
+              "label": "No restriction"
+            },
+            {
+              "label": "Page finished to progress"
+            },
+            {
+              "label": "Full score to progress"
+            }
+          ]
+        },
+        {
           "label": "Үр дүнг харуулах",
           "description": "Идэвхжүүлсэн үед хэрэглэгч үр дүнг харж/илгээх боломжтой болно"
         },
