@@ -864,7 +864,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       }
 
       let mayProgressToNextChapter = false;
-      if (chapter.tasksLeft === 0) {
+
+      if (chapter.maxTasks === 0) {
         mayProgressToNextChapter = true;
       }
       else if (this.params.behaviour.navigationRestrictionMode === 'finished') {
