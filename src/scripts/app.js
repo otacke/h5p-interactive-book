@@ -772,7 +772,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
         }
 
         self.setSectionStatusByID(sectionUUID, self.activeChapter);
-        self.updateNavigationRestrictions(self.activeChapter);
+        self.updateNavigationRestrictions(self.activeChapter, event.getVerb() === 'completed');
       }
     });
 
@@ -835,13 +835,14 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     /**
      * Update navigation restrictions.
      * @param {number} targetChapterIndex Index of chapter to update restrictions for.
+     * @param {boolean} wasXAPICompleted True if chapter was completed by xAPI.
      */
-    this.updateNavigationRestrictions = (targetChapterIndex) => {
+    this.updateNavigationRestrictions = (targetChapterIndex, wasXAPICompleted = false) => {
       if (this.params.behaviour.navigationRestrictionMode === 'none') {
         return;
       }
 
-      if (this.areNavigationRestrictionsMet(targetChapterIndex)) {
+      if (this.areNavigationRestrictionsMet(targetChapterIndex, wasXAPICompleted)) {
         this.cascadeNavigationRestrictions(targetChapterIndex + 1, true);
         this.statusBarHeader.updateStatusBar();
         this.statusBarFooter.updateStatusBar();
@@ -851,9 +852,10 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     /**
      * Check if navigation restrictions are met for a chapter.
      * @param {number} chapterIndex Index of chapter to check.
+     * @param {boolean} wasXAPICompleted True if chapter was completed by xAPI.
      * @return {boolean} True if navigation restrictions are met and chapter can be accessed.
      */
-    this.areNavigationRestrictionsMet = (chapterIndex) => {
+    this.areNavigationRestrictionsMet = (chapterIndex, wasXAPICompleted = false) => {
       const chapter = this.chapters[chapterIndex];
       if (!chapter) {
         return false;
@@ -871,7 +873,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       else if (this.params.behaviour.navigationRestrictionMode === 'finished') {
         mayProgressToNextChapter = chapter.completed;
       }
-      else if (this.params.behaviour.navigationRestrictionMode === 'success') {
+      else if (wasXAPICompleted && this.params.behaviour.navigationRestrictionMode === 'success') {
         mayProgressToNextChapter =
           chapter.completed && chapter.instance.getScore() === chapter.instance.getMaxScore();
       }
