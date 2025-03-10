@@ -675,7 +675,6 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       // New chapter completed
       if (!chapter.completed) {
         chapter.completed = true;
-        chapter.instance.triggerXAPIScored(chapter.instance.getScore(), chapter.instance.getMaxScore(), 'completed');
       }
 
       // All chapters completed
@@ -759,7 +758,8 @@ export default class InteractiveBook extends H5P.EventDispatcher {
         'interacted',
         'attempted',
       ];
-      const isActionVerb = actionVerbs.indexOf(event.getVerb()) > -1;
+      const xAPIEventVerb = event.getVerb();
+      const isActionVerb = actionVerbs.indexOf(xAPIEventVerb) > -1;
       // Some content types may send xAPI events when they are initialized,
       // so check that chapter is initialized before setting any section change
       const isInitialized = self.chapters.length;
@@ -771,8 +771,12 @@ export default class InteractiveBook extends H5P.EventDispatcher {
           return;
         }
 
+        const chapterSubcontentId = self.chapters[self.activeChapter].instance.subContentId;
+        const xAPIEventIsFromChapter = this.subContentId === chapterSubcontentId;
+        const chapterXAPICompleted = xAPIEventIsFromChapter && xAPIEventVerb === 'completed';
+
         self.setSectionStatusByID(sectionUUID, self.activeChapter);
-        self.updateNavigationRestrictions(self.activeChapter, event.getVerb() === 'completed');
+        self.updateNavigationRestrictions(self.activeChapter, chapterXAPICompleted);
       }
     });
 
