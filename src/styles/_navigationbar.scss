@@ -67,6 +67,15 @@
       border: 0;
       padding: 0 1.125em;
       max-width: 100%;
+
+      &[disabled] {
+        cursor: not-allowed;
+      }
+
+      &:hover:not([disabled]) {
+        color: var(--color-base, $base-color);
+        cursor: pointer;
+      }
     }
 
     .h5p-interactive-book-navigation-section-icon {
@@ -91,11 +100,6 @@
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-  }
-
-  :hover {
-    color: var(--color-base, $base-color);
-    cursor: pointer;
   }
 }
 

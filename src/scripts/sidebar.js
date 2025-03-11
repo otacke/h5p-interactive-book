@@ -616,8 +616,13 @@ class SideBar extends H5P.EventDispatcher {
     });
   }
 
-  toggleChapterEnabled(chapterId, enabled) {
-    const button = this.chapterNodes[chapterId].querySelector('.h5p-interactive-book-navigation-chapter-button');
+  /**
+   * Toggle chapter.
+   * @param {number} chapterIndex Chapter Index.
+   * @param {boolean} collapse If true, will collapse chapter.
+   */
+  toggleChapterEnabled(chapterIndex, enabled) {
+    const button = this.chapterNodes[chapterIndex].querySelector('.h5p-interactive-book-navigation-chapter-button');
     if (!button) {
       return;
     }
@@ -632,6 +637,11 @@ class SideBar extends H5P.EventDispatcher {
 
       this.parent.read('newChapterCanBeAccessed');
     }
+
+    const sections = button.nextSibling?.querySelectorAll('.section-button');
+    sections?.forEach(sectionButton => {
+      sectionButton.disabled = !enabled;
+    });
   }
 
   animate(element, animationName = '') {
