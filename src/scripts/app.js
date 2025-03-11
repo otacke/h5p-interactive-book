@@ -1156,6 +1156,16 @@ export default class InteractiveBook extends H5P.EventDispatcher {
       this.statusBarHeader.updateStatusBar();
       this.statusBarFooter.updateStatusBar();
       this.instantiateNavigationRestrictions();
+
+      // Go back to first chapter if trying to access restricted chapter via URL
+      if (this.chapters[this.activeChapter].isAccessRestricted) {
+        const newChapter = {
+          h5pbookid: this.contentId,
+          chapter: `h5p-interactive-book-chapter-${this.chapters[0].instance.subContentId}`
+        };
+
+        this.trigger('newChapter', newChapter);
+      }
     }
   }
 
