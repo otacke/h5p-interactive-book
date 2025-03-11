@@ -192,7 +192,7 @@ export default class InteractiveBook extends H5P.EventDispatcher {
         this.pageContent.resetChapters();
         this.sideBar.resetIndicators();
 
-        this.instantiateNavigationRestrictions();
+        this.instantiateNavigationRestrictions(1);
       }
     };
 
@@ -275,6 +275,9 @@ export default class InteractiveBook extends H5P.EventDispatcher {
         currentState.score = this.getScore();
         currentState.maxScore = this.getMaxScore();
       }
+
+      currentState.firstRestrictedChapter = this.chapters.findIndex(chapter => chapter.isAccessRestricted);
+
       return currentState;
     };
 
@@ -893,19 +896,28 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     this.toggleChapterNavigation = (chapterIndex, enable) => {
       this.chapters[chapterIndex].isAccessRestricted = !enable;
       this.sideBar.toggleChapterEnabled(chapterIndex, enable);
+      this.statusBarHeader.updateStatusBar();
+      this.statusBarFooter.updateStatusBar();
     };
 
     /**
      * Instantiate navigation restrictions.
+     * @param {number} firstRestrictedChapter Index of first restricted chapter.
      */
-    this.instantiateNavigationRestrictions = () => {
+    this.instantiateNavigationRestrictions = (firstRestrictedChapter) => {
       if (this.params.behaviour.navigationRestrictionMode === 'none') {
         return;
       }
 
-      this.cascadeNavigationRestrictions(0, true);
-      this.statusBarHeader.updateStatusBar();
-      this.statusBarFooter.updateStatusBar();
+      if (typeof firstRestrictedChapter !== 'number') {
+        firstRestrictedChapter = this.previousState?.firstRestrictedChapter || 1;
+      }
+
+      if (firstRestrictedChapter < 0 || firstRestrictedChapter >= this.chapters.length) {
+        return;
+      }
+
+      this.cascadeNavigationRestrictions(firstRestrictedChapter, false);
     };
 
     /**
@@ -1136,20 +1148,9 @@ export default class InteractiveBook extends H5P.EventDispatcher {
     }
 
     if ( this.hasValidChapters() ) {
-      // Kickstart the statusbar
       this.statusBarHeader.updateStatusBar();
       this.statusBarFooter.updateStatusBar();
       this.instantiateNavigationRestrictions();
-
-      // Go back to first chapter if trying to access restricted chapter via URL
-      if (!this.areNavigationRestrictionsMet(this.activeChapter - 1)) {
-        const newChapter = {
-          h5pbookid: this.contentId,
-          chapter: `h5p-interactive-book-chapter-${this.chapters[0].instance.subContentId}`
-        };
-
-        this.trigger('newChapter', newChapter);
-      }
     }
   }
 
