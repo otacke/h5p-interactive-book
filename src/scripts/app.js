@@ -792,6 +792,11 @@ export default class InteractiveBook extends H5P.EventDispatcher {
      * @param {string} target.section Section UUID.
      */
     this.redirectChapter = (target) => {
+      const targetChapter = this.chapters.find(chapter => target.chapter.endsWith(chapter.instance.subContentId));
+      if (targetChapter?.isAccessRestricted) {
+        return;
+      }
+
       /**
        * If true, we already have information regarding redirect in newHandler
        * When using browser history, a convert is neccecary
